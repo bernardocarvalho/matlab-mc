@@ -12,9 +12,10 @@ function [ FELE, KELE ] = buildKELE(Nelem,Connect,nodeCoord, EE, VV)
 %F= tx*h*b/2
 % divide-se por 2 pois a força esta dividida por dois nós
 %os nós das pontas complemntam-se
-
+    FELE= cell(1); % 
+%FELE= cell(Nelem);
 for ele=1:1:Nelem
-    tipo =Connect(ele,3)
+    tipo =Connect(ele,3);
     if(tipo ==4)
         x1=nodeCoord(Connect(ele,4),2);
         y1=nodeCoord(Connect(ele,4),3);
