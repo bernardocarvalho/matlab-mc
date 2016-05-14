@@ -12,6 +12,9 @@ fprintf(1,'Numero de Nos: %d\n', Nnodes );
 InputText = textscan(fid,'%s',1,'delimiter','\n');  % Read  line
 InputText = textscan(fid,'%f %f %f', Nnodes);  
 nodeCoord = cell2mat(InputText);
+% Coordenadas no ficheiro estao em mm
+nodeCoord(:,2) = 1e-3*nodeCoord(:,2);
+nodeCoord(:,3) = 1e-3*nodeCoord(:,3);
 InputText = textscan(fid,'%s',2,'delimiter','\n', 'CommentStyle', '%');  % Read  line
 disp(InputText{1}{1})
 

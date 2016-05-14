@@ -34,13 +34,19 @@ lerFich
 % Global matrices construction: (assemblage of K and F without BCs)
 %K = buildK(Nnodes, Connect, KELE);
 K = buildK(Nnodes, Nelem, Connect, KELE);
-F = 1e-2*buildF(Nnodes, NTI, TI, FELE);
+F = 1.0*buildF(Nnodes, NTI, TI, FELE);
 % Impose Boundary conditions:
 [fixeddofs, freedofs] = buildFreedofs(Nnodes, CFE);
 %--------------------------------------------------------------------------
 % PROCESSING (2): Static Solution
 %--------------------------------------------------------------------------
 U(freedofs,:)  = K(freedofs,freedofs)\F(freedofs,:);  %Gauss (do not invert)
+U=full(U);
+indx=1:2:2*Nnodes;
+Ux=U(indx);
+indx=2:2:2*Nnodes;
+Uy=U(indx);
+
 %--------------------------------------------------------------------------
 % POST PROCESSING (by now only displacement):
 %--------------------------------------------------------------------------
