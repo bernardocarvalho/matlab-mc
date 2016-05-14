@@ -32,9 +32,9 @@ lerFich
 % matrices)
 
 % Global matrices construction: (assemblage of K and F without BCs)
-K = buildK(Nnodes, Connect, KELE);
-
-F = buildF(Nnodes, NTI, TI, FELE);
+%K = buildK(Nnodes, Connect, KELE);
+K = buildK(Nnodes, Nelem, Connect, KELE);
+F = 1e-2*buildF(Nnodes, NTI, TI, FELE);
 % Impose Boundary conditions:
 [fixeddofs, freedofs] = buildFreedofs(Nnodes, CFE);
 %--------------------------------------------------------------------------
