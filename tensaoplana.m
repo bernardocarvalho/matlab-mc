@@ -21,25 +21,26 @@ tecla=input('enter to continue -->');
 lerFich
 %--------------------------------------------------------------------------
 
+% Element stiffness matrix construction (EE,AA,le equals in all elements):
+% Distributed load construction (qq, le equal in all elements):
+[FELE, KELE ] = buildKELE(Nelem, Connect, nodeCoord, EE, VV);
+
 %--------------------------------------------------------------------------
 % GLOBAL SOLUTION
 %--------------------------------------------------------------------------
 % Definition of global matrices: (avoid dynamic allocation and full
 % matrices)
 
-% Element stiffness matrix construction (EE,AA,le equals in all elements):
-[FELE, KELE ] = buildKELE(Nelem,Connect,nodeCoord, EE, VV);
 % Global matrices construction: (assemblage of K and F without BCs)
+K = buildK(Nnodes, Connect, KELE);
 
-K = buildK(Nelem,Connect,KELE);
-% Distributed loadconstruction (qq, le equal in all elements):
-Fe = qq* [  le/2;
-            le/2];
+F = buildF(Nnodes, NTI, TI, FELE);
 % Impose Boundary conditions:
+[fixeddofs, freedofs] = buildFreedofs(Nnodes, CFE);
 %--------------------------------------------------------------------------
 % PROCESSING (2): Static Solution
 %--------------------------------------------------------------------------
-
+U(freedofs,:)  = K(freedofs,freedofs)\F(freedofs,:);  %Gauss (do not invert)
 %--------------------------------------------------------------------------
 % POST PROCESSING (by now only displacement):
 %--------------------------------------------------------------------------
