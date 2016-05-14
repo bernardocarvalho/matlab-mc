@@ -1,4 +1,4 @@
-function [FELE, KELE ] = buildKELE(Nelem,Connect,nodeCoord, EE, VV)
+function [FELE, KELE ] = buildKELE(Nelem, Connect, nodeCoord, TI, EE, VV)
 % |\
 % |  \
 % |____\
