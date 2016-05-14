@@ -42,11 +42,11 @@ fprintf(1,'Fontes/carregamentos distribuídos: %d\n', Fdis );
 %Condiçoes Fronteira Essenciais:
 InputText = textscan(fid,'%s',1,'delimiter','\n');
 InputText = textscan(fid,'%f',1,'delimiter','\n');  
-NnodesCFE = InputText{1};
-fprintf(1,'Numero de Nós CFE: %d\n', NnodesCFE );
+NCFE = InputText{1};
+fprintf(1,'Numero de Nós CFE: %d\n', NCFE );
 
 %InputText = textscan(fid,'%s',1,'delimiter','\n');  % Read  line
-InputText = textscan(fid,'%f %f %f', 2*(NnodesCFE+1)); 
+InputText = textscan(fid,'%f %f %f', 2*(NCFE+1)); 
 CFE = cell2mat(InputText)
 
 %Cargas Pontuais:
@@ -58,9 +58,9 @@ fprintf(1,'Cargas Pontuais Impostas: %d\n', Cpont);
 %Tensão imposta da fronteira:
 InputText = textscan(fid,'%s',1,'delimiter','\n');
 InputText = textscan(fid,'%f',1,'delimiter','\n');  
-EleTen = InputText{1};
-fprintf(1,'Tensões impostas da fronteira: %d\n', EleTen);
-InputText = textscan(fid,'%f %f %f %f %f', EleTen);
+NTI= InputText{1};
+fprintf(1,'Tensões impostas da fronteira: %d\n', NTI);
+InputText = textscan(fid,'%f %f %f %f %f', NTI);
 
 TI = cell2mat(InputText)
 

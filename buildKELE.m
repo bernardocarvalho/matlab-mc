@@ -1,4 +1,4 @@
-function [FELE, KELE ] = buildKELE(Nelem, Connect, nodeCoord, TI, EE, VV)
+function [FELE, KELE ] = buildKELE(Nelem, Connect, nodeCoord,  EE, VV)
 % |\
 % |  \
 % |____\
@@ -11,7 +11,7 @@ function [FELE, KELE ] = buildKELE(Nelem, Connect, nodeCoord, TI, EE, VV)
 %F= tx*h*b/2
 % divide-se por 2 pois a força esta dividida por dois nós
 %os nós das pontas complemntam-se
-
+h=1e-3; % Espessura da placa ( passar para argumento )
 for ele=1:1:Nelem
     tipo =Connect(ele,3);
     if(tipo ==4)
@@ -20,18 +20,18 @@ for ele=1:1:Nelem
         x3=nodeCoord(Connect(ele,6),2);
         y3=nodeCoord(Connect(ele,6),3);
         a=x3-x1; b=y3-y1;
-        KELE{ele}= K_TP4(EE,VV,a,b)*(1e-3); % precisa de abs() ? 
+        KELE{ele}= K_TP4(EE,VV,a,b)*h; % precisa de abs() ? 
 
-        k = find (TI(:,1)==ele);
-        if k>0
-            tx = TI(k,4);
-            ty = TI(k,5);
-            FELE{ele} = F_TP4 (tx, ty, b)*(1e-3) ; 
-        end
+%        k = find (TI(:,1)==ele);
+%        if k>0
+%            tx = TI(k,4);
+ %           ty = TI(k,5);
+            FELE{ele} = F_TP4 ( b)*h ; 
+  %      end
 
-        if isempty(k)== 1
-            FELE {ele} = [0; 0; 0 ; 0 ; 0 ; 0 ; 0 ; 0];
-        end
+%        if isempty(k)== 1
+%            FELE {ele} = [0; 0; 0 ; 0 ; 0 ; 0 ; 0 ; 0];
+%        end
         % atenção: multiplicar pela espessura
 
     end
@@ -48,9 +48,9 @@ for ele=1:1:Nelem
         [R] = transf(teta);
 
         a=abs(x3-x2); b=abs(y3-y2);  %verificar a Ordem
-        Kel{ele}= K_TP3(EE,VV,a,b)*(1e-3); %temos que multiplica pela esperssura
-        KELE{ele}= R'*Kel{ele}*R;
-        FELE{ele}=[0; 0; 0; 0 ; 0 ; 0]; %temos que multiplicar pela espessura
+        Kel{ele}= K_TP3(EE, VV, a, b)*h; %temos que multiplica pela esperssura
+        KELE{ele}= R' * Kel{ele} * R;
+        FELE{ele}=[0 0 0 0  0  0]; %temos que multiplicar pela espessura
 
 
     end

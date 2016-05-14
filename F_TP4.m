@@ -6,8 +6,9 @@
 % (1,2)|_______|-»
 %               (3,4)
 % Só temos força nos graus de liberdade 3,4,5,e 6
-function [FELE] = F_TP4 (tx, ty, b)
+function [FELE] = F_TP4 (b)
 
-FELE = [ 0 ; 0 ; tx*b/2 ; ty*b/2 ; tx*b/2 ; ty*b/2; 0 ; 0];
+FELE = [ 0  0  b/2  b/2  b/2  b/2 0  0];
 % (Grau de liberdade 1, gdl 2, gdl 3.......)
+end
 
