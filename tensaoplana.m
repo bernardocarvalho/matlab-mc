@@ -12,7 +12,7 @@ clc;
 fprintf(1,'\n\n------------------------------------------------------\n');
 fprintf(1,'\n    FINITE ELEMENT ANALYSIS OF a Planar Stress		     \n');
 fprintf(1,'\n------------------------------------------------------\n\n');
-tecla=input('enter to continue -->');
+%tecla=input('enter to continue -->');
 %--------------------------------------------------------------------------
 % PRE-PROCESSING (1):
 %--------------------------------------------------------------------------
@@ -41,16 +41,27 @@ F = 1.0*buildF(Nnodes, NTI, TI, FELE);
 % PROCESSING (2): Static Solution
 %--------------------------------------------------------------------------
 U(freedofs,:)  = K(freedofs,freedofs)\F(freedofs,:);  %Gauss (do not invert)
-U=full(U);
+
+%--------------------------------------------------------------------------
+% POST PROCESSING 
+%--------------------------------------------------------------------------
+
+Uf=full(U);
 indx=1:2:2*Nnodes;
-Ux=U(indx);
+Ux=Uf(indx);
 indx=2:2:2*Nnodes;
-Uy=U(indx);
-
-%--------------------------------------------------------------------------
-% POST PROCESSING (by now only displacement):
-%--------------------------------------------------------------------------
-
+Uy=Uf(indx);
+for i=1:1:Nnodes
+    fprintf(1,'Node: %d, Displacement X: %14.7e m Y: %14.7e m\n',i, Ux(i), Uy(i));
+end
+max_disp_x = max(abs(Ux));
+max_disp_y = max(abs(Uy));
+fprintf(1,'\n     -> Maximum Displacement X: %14.7e m Y: %14.7e m\n\n',max_disp_x,max_disp_y);
+ED_num2= full(1/2*U'*F)                                      % 1/2 work force
+fprintf(1,'\n     -> Energia de Deformação elastice : %14.7e J \n\n', ED_num2);
 %
 % Plot
 %
+Graf
+GrafTensoes
+

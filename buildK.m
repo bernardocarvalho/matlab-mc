@@ -14,7 +14,7 @@ function [ K] = buildK(Nnodes, Nelem, Connect, KELE)
                 for iNd2=(iNd1+1):1:NiNd
                     nd2=Connect(ele, 3 + iNd2);
                     K  = fillSubK(K, ele, nd1, nd2, iNd1, iNd2, KELE); % fill non diagonal element
-                    K  = fillSubK(K, ele, nd2, nd1, iNd1, iNd2, KELE); % Matrix is symetric 
+                    K  = fillSubK(K, ele, nd2, nd1, iNd2,  iNd1, KELE); % Matrix is symetric 
                 end
             end 
      end

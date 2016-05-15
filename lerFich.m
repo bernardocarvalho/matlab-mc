@@ -64,7 +64,6 @@ InputText = textscan(fid,'%f',1,'delimiter','\n');
 NTI= InputText{1};
 fprintf(1,'Tensões impostas da fronteira: %d\n', NTI);
 InputText = textscan(fid,'%f %f %f %f %f', NTI);
-
 TI = cell2mat(InputText)
 
 fclose(fid);

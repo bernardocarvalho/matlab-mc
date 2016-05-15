@@ -13,8 +13,8 @@ for tirow=1:1:NTI
     fx=TI(tirow,4);
     fy=TI(tirow,5);
 
-    F(2*ni2-1) = FELE{tiele}(3) *fx;
-    F(2*ni2) = FELE{tiele}(4) *fy;
-    F(2*ni3-1) = FELE{tiele}(5) *fx;
-    F(2*ni3) = FELE{tiele}(6) *fy;
+    F(2*ni2-1) = F(2*ni2-1) + FELE{tiele}(3) *fx;
+    F(2*ni2) = F(2*ni2)     + FELE{tiele}(4) *fy;
+    F(2*ni3-1) = F(2*ni3-1) + FELE{tiele}(5) *fx;
+    F(2*ni3) =  F(2*ni3)    + FELE{tiele}(6) *fy;
 end
