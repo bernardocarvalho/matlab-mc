@@ -70,7 +70,7 @@ matrix de incidencias/conectividades
 26   1  4 30 29 32 31     
 propriedades material
 1 
-  1  1  207000000  0.25  1 
+  1  1  2.07e11  0.25  1 
 Fontes/carregamentos distribuídos
 0 
 Condição fronteira essencial 
